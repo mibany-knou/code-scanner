@@ -557,7 +557,7 @@ public final class CodeScanner {
             if (decoderWrapper != null) {
                 final Camera camera = decoderWrapper.getCamera();
                 camera.setPreviewCallback(mPreviewCallback);
-                camera.setPreviewTexture(mSurfaceHolder.getSurfaceTexture());
+                // camera.setPreviewTexture(mSurfaceHolder.getSurfaceTexture());
                 if (!internal && decoderWrapper.isFlashSupported() && mFlashEnabled) {
                     setFlashEnabledInternal(true);
                 }
