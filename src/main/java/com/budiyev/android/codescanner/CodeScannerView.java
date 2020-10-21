@@ -31,6 +31,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -66,7 +67,7 @@ public final class CodeScannerView extends ViewGroup {
     private static final float DEFAULT_FRAME_SIZE = 0.75f;
     private static final float BUTTON_SIZE_DP = 56f;
     private static final float FOCUS_AREA_SIZE_DP = 20f;
-    private SurfaceView mPreviewView;
+    private TextureView mPreviewView;
     private ViewFinderView mViewFinderView;
     private ImageView mAutoFocusButton;
     private ImageView mFlashButton;
@@ -123,9 +124,10 @@ public final class CodeScannerView extends ViewGroup {
 
     private void initialize(@NonNull final Context context, @Nullable final AttributeSet attrs,
             @AttrRes final int defStyleAttr, @StyleRes final int defStyleRes) {
-        mPreviewView = new SurfaceView(context);
+        mPreviewView = new TextureView(context);
         mPreviewView.setLayoutParams(
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
         mViewFinderView = new ViewFinderView(context);
         mViewFinderView.setLayoutParams(
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
@@ -506,7 +508,7 @@ public final class CodeScannerView extends ViewGroup {
     }
 
     @NonNull
-    SurfaceView getPreviewView() {
+    TextureView getPreviewView() {
         return mPreviewView;
     }
 

@@ -38,6 +38,7 @@ import android.hardware.Camera.Parameters;
 import android.os.Handler;
 import android.os.Process;
 import android.view.SurfaceHolder;
+import android.view.TextureView;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
@@ -98,8 +99,7 @@ public final class CodeScanner {
     private final Context mContext;
     private final Handler mMainThreadHandler;
     private final CodeScannerView mScannerView;
-    private final SurfaceHolder mSurfaceHolder;
-    private final SurfaceHolder.Callback mSurfaceCallback;
+    private final TextureView mSurfaceHolder;
     private final Camera.PreviewCallback mPreviewCallback;
     private final Camera.AutoFocusCallback mTouchFocusCallback;
     private final Camera.AutoFocusCallback mSafeAutoFocusCallback;
@@ -141,9 +141,9 @@ public final class CodeScanner {
     public CodeScanner(@NonNull final Context context, @NonNull final CodeScannerView view) {
         mContext = context;
         mScannerView = view;
-        mSurfaceHolder = view.getPreviewView().getHolder();
+        mSurfaceHolder = view.getPreviewView();
         mMainThreadHandler = new Handler();
-        mSurfaceCallback = new SurfaceCallback();
+        // mSurfaceCallback = new SurfaceCallback();
         mPreviewCallback = new PreviewCallback();
         mTouchFocusCallback = new TouchFocusCallback();
         mSafeAutoFocusCallback = new SafeAutoFocusCallback();
@@ -456,7 +456,7 @@ public final class CodeScanner {
             }
         }
         if (!mPreviewActive) {
-            mSurfaceHolder.addCallback(mSurfaceCallback);
+            // mSurfaceHolder.addCallback(mSurfaceCallback);
             startPreviewInternal(false);
         }
     }
@@ -467,13 +467,13 @@ public final class CodeScanner {
     @MainThread
     public void stopPreview() {
         if (mInitialized && mPreviewActive) {
-            mSurfaceHolder.removeCallback(mSurfaceCallback);
+            // mSurfaceHolder.removeCallback(mSurfaceCallback);
             stopPreviewInternal(false);
         }
     }
 
     /**
-     * Release resources, and stop preview if needed; call this method in {@link Activity#onPause()}
+     * Release resources, and stop preview if needed; call this method in
      */
     @MainThread
     public void releaseResources() {
@@ -555,7 +555,7 @@ public final class CodeScanner {
             if (decoderWrapper != null) {
                 final Camera camera = decoderWrapper.getCamera();
                 camera.setPreviewCallback(mPreviewCallback);
-                camera.setPreviewDisplay(mSurfaceHolder);
+                camera.setPreviewTexture(mSurfaceHolder.getSurfaceTexture());
                 if (!internal && decoderWrapper.isFlashSupported() && mFlashEnabled) {
                     setFlashEnabledInternal(true);
                 }
