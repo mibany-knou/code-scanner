@@ -23,6 +23,7 @@
  */
 package com.budiyev.android.codescanner;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -32,6 +33,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.ImageFormat;
+import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
@@ -844,6 +846,25 @@ public final class CodeScanner {
             if (camera == null) {
                 throw new CodeScannerException("Unable to access camera");
             }
+
+            final Camera surfaceCamera  = camera;
+            mSurfaceHolder.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
+                @Override
+                public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+                    try {
+                        surfaceCamera.setPreviewTexture(surface);
+                    } catch (IOException e) {
+                    }
+                }
+                @Override
+                public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {}
+                @Override
+                public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+                    return false;
+                }
+                @Override
+                public void onSurfaceTextureUpdated(SurfaceTexture surface) {}
+            });
             final Parameters parameters = camera.getParameters();
             if (parameters == null) {
                 throw new CodeScannerException("Unable to configure camera");

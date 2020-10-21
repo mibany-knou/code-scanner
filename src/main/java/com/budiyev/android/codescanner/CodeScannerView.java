@@ -127,7 +127,6 @@ public final class CodeScannerView extends ViewGroup {
         mPreviewView = new TextureView(context);
         mPreviewView.setLayoutParams(
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-
         mViewFinderView = new ViewFinderView(context);
         mViewFinderView.setLayoutParams(
                 new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
