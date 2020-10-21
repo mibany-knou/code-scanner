@@ -874,10 +874,10 @@ public final class CodeScanner {
             final Point imageSize =
                     Utils.findSuitableImageSize(parameters, portrait ? mHeight : mWidth,
                             portrait ? mWidth : mHeight);
-            final int imageWidth = imageSize.getX();
-            final int imageHeight = imageSize.getY();
+            final int imageWidth = 960;
+            final int imageHeight = 540;
             parameters.setPreviewSize(imageWidth, imageHeight);
-            parameters.setPreviewFormat(ImageFormat.NV21);
+            // parameters.setPreviewFormat(ImageFormat.NV21);
             final Point previewSize = Utils.getPreviewSize(portrait ? imageHeight : imageWidth,
                     portrait ? imageWidth : imageHeight, mWidth, mHeight);
             final List<String> focusModes = parameters.getSupportedFocusModes();
