@@ -46,7 +46,7 @@ import androidx.annotation.Nullable;
 import com.google.zxing.BarcodeFormat;
 
 /**
- * Code scanner.
+ * Code scanner
  * Supports portrait and landscape screen orientations, back and front facing cameras,
  * auto focus and flash light control, touch focus, viewfinder customization.
  *
